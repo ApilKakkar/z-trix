@@ -1,10 +1,11 @@
 import App from './App.svelte';
+import Experience from './Experience/Experience';
 
 const app = new App({
 	target: document.body,
-	props: {
-		name: 'world'
-	}
 });
 
 export default app;
+
+
+const experience = new Experience(document.querySelector('canvas.ztrix'))
