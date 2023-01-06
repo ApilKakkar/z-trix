@@ -1,10 +1,24 @@
-import Experience from "./Experience";
+import * as dat from 'dat.gui'
+import EventEmitter from './Utils/EventEmitter.js'
 
-export default class DatGui
+export default class DatGui extends EventEmitter
 {
-    experience: Experience;
+    [x: string]: any   
+    
     constructor(){
-        this.experience = new Experience(HTMLCanvasElement,{})
-        console.log('dat')
+        super()
+
+        this.gui = new dat.GUI()
+
+        this.parameters = {
+            materialColor: '#ffeded'
+        }
+
+        this.gui
+        .addColor(this.parameters, 'materialColor')
+        .onChange(()=>{
+            this.trigger('materialColorChange')
+        })
+
     }
 }
