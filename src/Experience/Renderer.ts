@@ -10,7 +10,7 @@ export default class Renderer
     camera: import("/Users/apilkakkar/Personal/z-trix/src/Experience/Camera").default;
     instance: any;
     constructor(){
-        this.experience = new Experience(HTMLCanvasElement, {})
+        this.experience = new Experience(HTMLCanvasElement)
 
         this.sizes = this.experience.sizes
         this.scene = this.experience.scene

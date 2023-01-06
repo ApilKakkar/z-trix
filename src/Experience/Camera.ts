@@ -13,7 +13,7 @@ export default class Camera
     controls: any
     constructor()
     {   
-        this.experience = new Experience(HTMLCanvasElement, {})
+        this.experience = new Experience(HTMLCanvasElement)
 
         this.sizes = this.experience.sizes
         this.scene = this.experience.scene

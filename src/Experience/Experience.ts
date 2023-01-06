@@ -6,6 +6,7 @@ import Camera from './Camera';
 import Renderer from './Renderer';
 import Geometries from './Geometries';
 import Lights from './Lights';
+import DatGui from './DatGui';
 
 declare global {
     interface Window {
@@ -26,7 +27,8 @@ export default class Experience extends EventEmitter
     geometries: Geometries;
     parameters: any;
     lights: Lights;
-    constructor(canvas, parameters){
+    datgui: DatGui;
+    constructor(canvas){
         super()
 
         //Making Experienc Class SINGLETON
@@ -41,7 +43,7 @@ export default class Experience extends EventEmitter
 
         //Options
         this.canvas = canvas
-        this.parameters = parameters
+        this.datgui = new DatGui()
 
         //Setup
         this.sizes = new Sizes()
@@ -60,6 +62,10 @@ export default class Experience extends EventEmitter
         this.time.on('tick', ()=>{
             this.update()
         })
+
+        this.datgui.on('materialColorChange', ()=>{
+            this.datguichange()
+        })
     }
     resize() {
         // console.log('resize occured')
@@ -70,5 +76,9 @@ export default class Experience extends EventEmitter
     update() {
         this.camera.update()
         this.renderer.update()
+    }
+
+    datguichange() {
+        this.geometries.datguichange()
     }
 }
