@@ -7,6 +7,7 @@ import Renderer from './Renderer';
 import Geometries from './Geometries';
 import Lights from './Lights';
 import DatGui from './DatGui';
+import Particles from './Particles';
 
 declare global {
     interface Window {
@@ -28,6 +29,7 @@ export default class Experience extends EventEmitter
     parameters: any;
     lights: Lights;
     datgui: DatGui;
+    particles: Particles;
     constructor(canvas){
         super()
 
@@ -54,6 +56,7 @@ export default class Experience extends EventEmitter
 
         this.geometries = new Geometries()
         this.lights = new Lights()
+        this.particles = new Particles()
 
         this.sizes.on('resize',()=>{
             this.resize()
@@ -63,8 +66,20 @@ export default class Experience extends EventEmitter
             this.update()
         })
 
+        this.camera.on('scroll', ()=>{
+            this.scroll()
+        })
+
         this.datgui.on('materialColorChange', ()=>{
-            this.datguichange()
+            this.datguichangeGeometries()
+        })
+
+        this.datgui.on('particlesMaterialColorChange', ()=>{
+            this.datguichangeParticles()
+        })
+
+        this.datgui.on('cameraPositoinChange', ()=>{
+            console.log('camera pos change')
         })
     }
     resize() {
@@ -79,7 +94,15 @@ export default class Experience extends EventEmitter
         this.geometries.update()
     }
 
-    datguichange() {
+    scroll() {
+        this.geometries.scroll()
+    }
+
+    datguichangeGeometries() {
         this.geometries.datguichange()
+    }
+    
+    datguichangeParticles(){
+        this.particles.datguichange()
     }
 }

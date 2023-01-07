@@ -4,7 +4,7 @@
     <h1>Z-TRIX</h1>
 </section>
 <section class="section">
-    <h2>A 3D Animation studio</h2>
+    <h2> 3D Web Experience</h2>
 </section>
 <section class="section">
     <h2>Thanks for your time.</h2>

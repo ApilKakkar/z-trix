@@ -11,13 +11,20 @@ export default class DatGui extends EventEmitter
         this.gui = new dat.GUI()
 
         this.parameters = {
-            materialColor: '#8c0d28'
+            materialColor: '#8c0d28',
+            particlesMaterialColor: '#ffe100',
         }
 
         this.gui
         .addColor(this.parameters, 'materialColor')
         .onChange(()=>{
             this.trigger('materialColorChange')
+        })
+
+        this.gui
+        .addColor(this.parameters, 'particlesMaterialColor')
+        .onChange(()=>{
+            this.trigger('particlesMaterialColorChange')
         })
 
     }
