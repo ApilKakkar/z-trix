@@ -76,6 +76,7 @@ export default class Experience extends EventEmitter
     update() {
         this.camera.update()
         this.renderer.update()
+        this.geometries.update()
     }
 
     datguichange() {

@@ -11,7 +11,7 @@ export default class DatGui extends EventEmitter
         this.gui = new dat.GUI()
 
         this.parameters = {
-            materialColor: '#ffeded'
+            materialColor: '#8c0d28'
         }
 
         this.gui
