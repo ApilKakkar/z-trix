@@ -1,9 +1,11 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import Experience from "./Experience"
+import EventEmitter from "./Utils/EventEmitter.js"
 
-export default class Camera
+export default class Camera extends EventEmitter
 {
+    [x: string]: any
     
     experience: Experience
     sizes: import("/Users/apilkakkar/Personal/z-trix/src/Experience/Utils/sizes").default
@@ -17,21 +19,28 @@ export default class Camera
     parallaxX: number
     instanceGroup: any
     time: import("/Users/apilkakkar/Personal/z-trix/src/Experience/Utils/Time").default
+    datgui: any
     constructor()
-    {   
+    {       
+        super()
+
         this.experience = new Experience(HTMLCanvasElement)
 
         this.sizes = this.experience.sizes
         this.scene = this.experience.scene
         this.canvas = this.experience.canvas
         this.time = this.experience.time
+        this.datgui = this.experience.datgui
 
         // for camera movement with scroll
 
         this.scrollY = window.scrollY
 
+        
         window.addEventListener('scroll',()=>{
             this.scrollY = window.scrollY
+            
+            this.trigger('scroll')
         })
 
         // for camera movement with cursor
@@ -61,6 +70,8 @@ export default class Camera
 
         this.instance.position.set(0, 0, 6)
 
+        this.datgui.gui.add(this.instance.position, 'x', -5, 5)
+
         this.instanceGroup.add(this.instance)
         
     }
@@ -79,6 +90,7 @@ export default class Camera
     update() {
         // for orbit controls
         // this.controls.update()
+        // this.instance.lookAt(0, 0, 0)
 
         this.instance.position.y = - (this.scrollY / this.sizes.height) * this.experience.geometries.objectsDistance
 
@@ -86,7 +98,7 @@ export default class Camera
         this.parallaxY = this.cursor.y
         
         // we are doing easing by using lerping formula and also using deltatime so that it looks same on every pc.
-        this.instanceGroup.position.x = - (this.parallaxX - this.instanceGroup.position.x) * 5 * (this.time.delta / 1000)
-        this.instanceGroup.position.y = (this.parallaxY - this.instanceGroup.position.y) * 5 * (this.time.delta / 1000)
+        this.instanceGroup.position.x = - (this.parallaxX - this.instanceGroup.position.x) * 6 * (this.time.delta / 1000)
+        this.instanceGroup.position.y = (this.parallaxY - this.instanceGroup.position.y) * 6 * (this.time.delta / 1000)
     }
 }

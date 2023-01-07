@@ -1,5 +1,6 @@
-import Experience from "./Experience"
 import * as THREE from 'three'
+import gsap from 'gsap'
+import Experience from "./Experience"
 
 export default class Geometries
 {
@@ -10,12 +11,18 @@ export default class Geometries
     textureLoader: any
     gradientTexture: any
     sectionMeshes: any[]
-    elapsed: number
+    delta: number
     objectsDistance: number
+    currentSection: number
+    newSection: number
+    camera: import("/Users/apilkakkar/Personal/z-trix/src/Experience/Camera").default
+    sizes: import("/Users/apilkakkar/Personal/z-trix/src/Experience/Utils/sizes").default
     constructor(){
 
         this.experience = new Experience(HTMLCanvasElement)
         this.scene = this.experience.scene
+        this.camera = this.experience.camera
+        this.sizes = this.experience.sizes
         this.datgui = this.experience.datgui
 
         //textures
@@ -54,19 +61,33 @@ export default class Geometries
         this.scene.add(mesh1, mesh2, mesh3)
 
         this.sectionMeshes = [mesh1,mesh2,mesh3]
+
+        this.currentSection = 0
     }
 
     datguichange() {
         this.material.color.set(this.datgui.parameters.materialColor)
+    }   
+
+    scroll() {
+        this.newSection = Math.round(this.camera.scrollY / this.sizes.height)
+        if(this.newSection != this.currentSection){
+            this.currentSection = this.newSection
+            gsap.to(this.sectionMeshes[this.currentSection].rotation,{
+                duration: 1.5,
+                x: '+=6',
+                // y: '+=3'
+            })
+        }
     }
 
     update() {
         // rotation variables
-        this.elapsed = this.experience.time.elapsed / 1000
+        this.delta = this.experience.time.delta / 1000
 
         for( const mesh of this.sectionMeshes){
-            mesh.rotation.x = this.elapsed * 0.1
-            mesh.rotation.y = this.elapsed * 0.12
+            mesh.rotation.x += this.delta * 0.1
+            mesh.rotation.y += this.delta * 0.12
         }
     }
 }
