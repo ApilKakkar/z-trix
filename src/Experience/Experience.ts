@@ -8,6 +8,7 @@ import Geometries from './Geometries';
 import Lights from './Lights';
 import DatGui from './DatGui';
 import Particles from './Particles';
+import Boxes from './Boxes';
 
 declare global {
     interface Window {
@@ -30,6 +31,7 @@ export default class Experience extends EventEmitter
     lights: Lights;
     datgui: DatGui;
     particles: Particles;
+    boxes: Boxes;
     constructor(canvas){
         super()
 
@@ -57,6 +59,7 @@ export default class Experience extends EventEmitter
         this.geometries = new Geometries()
         this.lights = new Lights()
         this.particles = new Particles()
+        this.boxes = new Boxes()
 
         this.sizes.on('resize',()=>{
             this.resize()
@@ -92,6 +95,7 @@ export default class Experience extends EventEmitter
         this.camera.update()
         this.renderer.update()
         this.geometries.update()
+        this.boxes.update()
     }
 
     scroll() {
