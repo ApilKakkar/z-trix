@@ -34,7 +34,7 @@ export default class Particles
         this.particlesMaterial = new THREE.PointsMaterial({
             color: this.datgui.parameters.particlesMaterialColor,
             sizeAttenuation: true,
-            size: 0.03
+            size: 0.05
         })
 
         this.particles = new THREE.Points(this.particlesGeometry, this.particlesMaterial)
