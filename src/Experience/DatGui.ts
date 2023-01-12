@@ -12,7 +12,7 @@ export default class DatGui extends EventEmitter
 
         this.parameters = {
             materialColor: '#8c0d28',
-            particlesMaterialColor: '#ffe100',
+            particlesMaterialColor: '#ffffff',
         }
 
         this.gui
