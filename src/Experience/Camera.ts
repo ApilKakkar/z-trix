@@ -68,11 +68,13 @@ export default class Camera extends EventEmitter
             100
         )
 
-        this.instance.position.set(0, 0, 6)
+        this.instance.position.set(0, 0, 12)
 
         this.datgui.gui.add(this.instance.position, 'x', -5, 5)
-
+        this.datgui.gui.add(this.instance.position, 'z', -30, 30)
+        
         this.instanceGroup.add(this.instance)
+        this.datgui.gui.add(this.instanceGroup.position, 'y', -30, 30)
         
     }
 

@@ -96,6 +96,7 @@ export default class Experience extends EventEmitter
         this.renderer.update()
         this.geometries.update()
         this.boxes.update()
+        this.particles.update()
     }
 
     scroll() {
