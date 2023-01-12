@@ -4,7 +4,7 @@
     padding: 0;
 }
 
-html{
+html,body{
 background-color: #1e1a20;
 }
 
@@ -31,7 +31,13 @@ background-color: #1e1a20;
     padding-right: 10%;
 }
 
-section:nth-child(odd)
+section:nth-child(even)
 {
     justify-content: flex-end;
+}
+
+.camera_controls{
+    position: fixed;
+    left: 80vw;
+    top: 35vh;
 }
