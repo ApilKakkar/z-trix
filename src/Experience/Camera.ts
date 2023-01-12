@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import gsap from 'gsap'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import Experience from "./Experience"
 import EventEmitter from "./Utils/EventEmitter.js"
@@ -75,7 +76,8 @@ export default class Camera extends EventEmitter
         
         this.instanceGroup.add(this.instance)
         this.datgui.gui.add(this.instanceGroup.position, 'y', -30, 30)
-        
+        // this.instanceGroup.rotation.z = Math.PI * 0.5
+
     }
 
     setOrbitControls() {
@@ -102,5 +104,20 @@ export default class Camera extends EventEmitter
         // we are doing easing by using lerping formula and also using deltatime so that it looks same on every pc.
         this.instanceGroup.position.x = - (this.parallaxX - this.instanceGroup.position.x) * 6 * (this.time.delta / 1000)
         this.instanceGroup.position.y = (this.parallaxY - this.instanceGroup.position.y) * 6 * (this.time.delta / 1000)
+    }
+
+    rotateCameraRight(){
+        const radian_angle = Math.PI/2
+        gsap.to(this.instance.rotation,{
+            duration: 1.5,
+            y: '-='+radian_angle,
+        })
+    }
+    rotateCameraLeft(){
+        const radian_angle = Math.PI/2
+        gsap.to(this.instance.rotation,{
+            duration: 1.5,
+            y: '+='+radian_angle,
+        })
     }
 }

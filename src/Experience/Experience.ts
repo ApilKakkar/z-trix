@@ -9,6 +9,7 @@ import Lights from './Lights';
 import DatGui from './DatGui';
 import Particles from './Particles';
 import Boxes from './Boxes';
+import GalaxyGenerator from './GalaxyGenerator';
 
 declare global {
     interface Window {
@@ -32,6 +33,7 @@ export default class Experience extends EventEmitter
     datgui: DatGui;
     particles: Particles;
     boxes: Boxes;
+    galaxyGenerator: GalaxyGenerator;
     constructor(canvas){
         super()
 
@@ -60,6 +62,7 @@ export default class Experience extends EventEmitter
         this.lights = new Lights()
         this.particles = new Particles()
         this.boxes = new Boxes()
+        this.galaxyGenerator = new GalaxyGenerator()
 
         this.sizes.on('resize',()=>{
             this.resize()

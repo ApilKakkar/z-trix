@@ -38,7 +38,6 @@ export default class Boxes
         this.geometry = new THREE.BoxGeometry(this.box_width,0.5,0)
         this.geometry.setAttribute('color', new THREE.BufferAttribute(this.colors, 3))
 
-        console.log(this.geometry)
         this.boxes_collection = []
 
         this.random_collection = []
